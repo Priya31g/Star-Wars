@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>star-wars-searchbar</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        
+        input {
+            font-size: 18px;
+            color: white;
+            margin: 1% 22%;
+            width: 500px;
+            height: 40px;
+            background-color: transparent;
+        }
+        
+        #movies {
+            height: 200px;
+            width: 500px;
+            border-top: none;
+            margin: 20%;
+            margin-top: 0%;
+            background-color: transparent;
+        }
+        
+        #movies>div:hover {
+            color: yellow;
+        }
+        
+        p {
+            width: 100px;
+            margin: 5px 50px;
+            font-size: 20px;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        img {
+            margin: 0% 45%;
+            width: 150px;
+        }
+        
+        #main {
+            margin: 10% 25%;
+            align-self: center;
+        }
+        
+        .showcase {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            min-height: 100vh;
+            padding: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111;
+            transition: 0.5s;
+            z-index: 2;
+        }
+        
+        .showcase video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+        
+        .text {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="showcase">
+        <video src="sparkle.mp4" muted loop autoplay></video>
+        <div id="main" class="text">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6XIYpkCUKvDL77B1D4E_0NTakUOAbEyvhinBbVwjE7a-1lwtr7sf2t_ZYq62i5VXDqOs&usqp=CAU">
+            <input type="text" oninput="debounce(main,1000)" id="query">
+            <div id="movies"></div>
+        </div>
+    </section>
+</body>
+
+</html>
+<script>
+    async function searchmovie(n) {
+        let res = await fetch(`https://swapi.dev/api/people/?search=${n}`);
+        let data = await res.json();
+        //  console.log(data);
+        return data.results;
+    }
+    let div = document.getElementById("movies");
+
+    function call(m) {
+        // let name = document.getElementById("query").value;
+        location.reload();
+        localStorage.setItem("detail", JSON.stringify(m));
+        // let movies = await searchmovie(name);
+
+        console.log(m)
+        window.location.href = `page2.html`
+    }
+
+
+    function appendMovie(m) {
+        console.log(m)
+
+        div.innerHTML = null;
+        for (let i = 0; i < m.length; i++) {
+            let div_det = document.createElement("div")
+            let p = document.createElement("p");
+            p.innerText = m[i].name;
+            p.setAttribute("id", "name")
+            let p1 = document.createElement("p");
+            p1.innerText = m[i].gender;
+            div_det.append(p, p1);
+            div_det.className += "flex";
+            div_det.setAttribute("id", i)
+            div_det.addEventListener('click', function() {
+                call(m[i]);
+            });
+            console.log(div_det.id)
+
+            div.append(div_det);
+
+        }
+
+    }
+
+
+    async function main() {
+        let name = document.getElementById("query").value;
+
+        if (name.length < 3) {
+            return false;
+        }
+        let movies = await searchmovie(name);
+        if (movies == undefined) {
+            // console.log("i");
+            return false;
+        } else {
+            appendMovie(movies)
+            console.log(movies);
+        }
+    }
+    var timerId;
+
+    function debounce(func, delay) {
+        let name = document.getElementById("query").value;
+
+        if (name.length < 3) {
+            return false;
+        }
+        if (timerId) {
+            clearTimeout(timerId)
+        }
+        // setTimeout(func, delay);
+        timerId = setTimeout(func, delay)
+
+    }
+    //https://star-wars-searchbar.vercel.app/
+</script>
