@@ -6,123 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>starWars details</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        video {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-        
-        #result {
-            border-top: none;
-            margin: 2.5% 20%;
-            background-color: transparent;
-            color: rgb(250, 69, 69);
-            display: flex;
-            align-self: center;
-            width: 85%;
-            border-radius: 6px;
-        }
-        
-        p {
-            text-align: center;
-        }
-        
-        #result>div {
-            width: 35%;
-            margin: 0% 2%;
-            height: 80%;
-            border: 1px solid rgb(250, 69, 69);
-            color: rgb(250, 69, 69);
-            align-self: center;
-            font-size: 20px;
-            border-radius: 6px;
-        }
-        
-        button {
-            border: 1px solid rgb(250, 69, 69);
-            font-size: 20px;
-            height: 50px;
-            width: 200px;
-            margin: 2% 35%;
-            background-color: transparent;
-            color: rgb(250, 69, 69);
-            border-radius: 4px;
-            margin-bottom: 5%;
-        }
-        
-        button :hover {
-            color: white;
-        }
-        
-        #personal_info:hover {
-            color: white;
-            border: 1px solid white;
-        }
-        
-        #anatomy:hover {
-            color: white;
-            border: 1px solid white;
-        }
-        
-        #main {
-            border: 1px solid rgb(250, 69, 69);
-            height: 50%;
-            width: 800px;
-            color: rgb(250, 69, 69);
-            margin: 25%;
-            margin-top: 10px;
-            border-radius: 6px;
-        }
-        
-        #n {
-            margin-bottom: 1%;
-            font-size: 35px;
-        }
-        
-        .showcase {
-            position: absolute;
-            right: 0;
-            width: 100%;
-            min-height: 100vh;
-            padding: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
-            transition: 0.5s;
-            z-index: 2;
-        }
-        
-        .showcase video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-        }
-        
-        .text {
-            position: relative;
-            z-index: 10;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/page2.css">
 </head>
 
 <body>
     <section class="showcase">
-        <video src="sparkle.mp4" muted loop autoplay></video>
+        <video src="./utils/sparkle.mp4" muted loop autoplay></video>
         <div id="main" class="text">
             <p id="n"></p>
             <div id="result">
@@ -139,33 +28,4 @@
 </body>
 
 </html>
-<script>
-    function redirect() {
-        window.location.href = "starWars.html"
-
-    }
-
-    function appendMovie() {
-        let t = localStorage.getItem(("detail"));
-        t = JSON.parse(t)
-            //  console.log(t)
-        let div1 = document.getElementById("personal_info");
-        let p1 = document.createElement("p");
-        p1.innerText = "Birth Year :   " + t.birth_year;
-        let p2 = document.createElement("p");
-        p2.innerText = "Gendre :   " + t.gender;
-        let p3 = document.createElement("p");
-        p3.innerText = "Heigth :   " + t.height;
-        div1.append(p1, p2, p3)
-        let div2 = document.getElementById("anatomy");
-        let a1 = document.createElement("p");
-        a1.innerText = "Eye color :   " + t.eye_color;
-        let a2 = document.createElement("p");
-        a2.innerText = "Mass :   " + t.mass;
-        let a3 = document.createElement("p");
-        a3.innerText = "Hair color :   " + t.hair_color;
-        div2.append(a1, a2, a3)
-        document.getElementById("n").innerText = t.name;
-    }
-    appendMovie()
-</script>
+<script src="./js/page2.js"></script>
