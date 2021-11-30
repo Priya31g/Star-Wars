@@ -1,5 +1,5 @@
 function redirect() {
-    window.location.href = "starWars.html"
+    window.location.href = "Index.html"
 
 }
 
