@@ -23,7 +23,7 @@
 
 - ### User can click on  ```GO BACK```  button to go to main page
   
-## [Demo](https://star-wars-character-details-clone.vercel.app/Index.html)
+## [Demo](https://star-wars-character-details-clone-29j6q55hh-priyakumarigupta.vercel.app)
 ​
 
 ​
